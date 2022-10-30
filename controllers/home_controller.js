@@ -17,9 +17,6 @@ async function index(req,res){
 }
 
 async function logout(req,res){
-    let user = await User.findById(req.session.user._id)
-    user.is_online = true;
-    await user.save()
     req.session.destroy(()=>res.redirect('/login'))
 }
 
