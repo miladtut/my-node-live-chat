@@ -16,6 +16,19 @@ socket.on('stopped',()=>{
     $('#writting').hide()
 })
 
+socket.on('status',(data)=>{
+    if(data.status == 'online'){
+        $('.'+data.uid).addClass(
+            'online'
+        )
+    }else{
+        $('.'+data.uid).removeClass(
+            'online'
+        )
+    }
+    
+})
+
 function join(id){
     socket.emit('join',{"user_id":id})
 }

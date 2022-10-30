@@ -2,7 +2,9 @@ const { disconnect } = require('mongoose');
 let Conversation = require('../models/conversation');
 let User = require('../models/user')
 var clients = [];
+var IO;
 function start(io){
+    IO = io;
     io.on('connection',(socket)=>{
         socket.on('join',(data)=>{
             socket.join(data.user_id)
@@ -55,12 +57,20 @@ function setUserStatusToOnline(id){
     User.findById(id).then((user)=>{
         user.is_online = true;
         user.save()
+        IO.emit('status',{
+            uid:user.id,
+            status:'online'
+        })
     })
 }
 function setUserStatusToOffline(id){
     User.findById(id).then((user)=>{
         user.is_online = false;
         user.save()
+        IO.emit('status',{
+            uid:user.id,
+            status:'offline'
+        })
     })
 }
 

@@ -56,10 +56,10 @@
 										<h1>Contacts</h1>
 										<div class="list-group" id="contacts" role="tablist">
 											<% for ( let usr of users ){ if(String(usr._id) != String(user._id)){ %>
-												<div class="filterMembers all contact <%- usr.is_online ? 'online' : 'offline' %> ">
+												<div class="filterMembers all contact <%- usr.is_online ? 'online' : '' %> <%= usr.id %>">
 													<img class="avatar-md" src="<%= usr.image %>" data-toggle="tooltip" data-placement="top" title="Janette" alt="avatar">
 													<div class="status">
-														<i class="material-icons <%- usr.is_online ? 'online' : 'offline' %>">fiber_manual_record</i>
+														<i class="material-icons <%- usr.is_online ? 'online' : '' %> <%= usr.id %>">fiber_manual_record</i>
 													</div>
 													<a href="/set_current_chat/<%= usr._id %>" class="data">
 														<h5><%= usr.username %></h5>
@@ -729,7 +729,7 @@
 											<div class="inside">
 												<a href="#"><img class="avatar-md" src="<%= chat_with.image %>" data-toggle="tooltip" data-placement="top" title="Keith" alt="avatar"></a>
 												<div class="status">
-													<i class="material-icons <%- chat_with.is_online ? 'online' : '' %>">fiber_manual_record</i>
+													<i class="material-icons <%-chat_with.is_online == true ? 'online' : '' %> <%= chat_with.id %>">fiber_manual_record</i>
 												</div>
 												<div class="data">
 													<h5><a href="#"><%= chat_with.username %></a></h5>

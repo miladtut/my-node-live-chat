@@ -19,8 +19,6 @@ async function login(req,res){
         if(user){
             let auth = bcrypt.compareSync(req.body.password,user.password)
             if(auth){
-                user.is_online = true;
-                await user.save()
                 req.session.user = user
                 console.log(user)
                 res.redirect('/')
