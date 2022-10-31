@@ -37,6 +37,16 @@ function start(io){
             console.log('stopped',to)
             io.to(to).emit('stopped');
         })
+
+        socket.on('requestPeerID',(data)=>{
+            io.to(data.to).emit('someOneRequestYourPeer',{
+                from:data.from
+            });
+        })
+        socket.on('hereIsMyPeer',(data)=>{
+            io.to(data.to).emit('peerSent',{peer:data.peer})
+        })
+        
     })
     
 }

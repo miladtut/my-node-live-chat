@@ -32,6 +32,7 @@
 						</div>
 					</div>
 				</div>
+				
 				<!-- End of Navigation -->
 				<!-- Start of Sidebar -->
 				<div class="sidebar" id="sidebar">
@@ -717,10 +718,12 @@
 				</div>
 				<!-- End of Create Chat -->
 				<div class="main">
+					
 					<div class="tab-content" id="nav-tabContent">
 						<!-- Start of Babble -->
 						<div class="babble tab-pane fade active show" id="list-chat" role="tabpanel" aria-labelledby="list-chat-list">
 							<!-- Start of Chat -->
+							
 							<% if(currentChat){ %>
 							<div class="chat" id="chat1">
 								<div class="top">
@@ -736,7 +739,7 @@
 													<span><%= chat_with.name %></span>
 												</div>
 												<button class="btn connect d-md-block d-none" name="1"><i class="material-icons md-30">phone_in_talk</i></button>
-												<button class="btn connect d-md-block d-none" name="1"><i class="material-icons md-36">videocam</i></button>
+												<button onclick="getPeer('<%= user.id %>','<%= chat_with._id %>')" class="btn connect d-md-block d-none" name="1"><i class="material-icons md-36">videocam</i></button>
 												<button class="btn d-md-block d-none"><i class="material-icons md-30">info</i></button>
 												<div class="dropdown">
 													<button class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="material-icons md-30">more_vert</i></button>
@@ -841,8 +844,11 @@
 							<div class="call" id="call1">
 								<div class="content">
 									<div class="container">
-										<div class="col-md-12">
+										<div class="col-md-12" style="position:relative;">
 											<div class="inside">
+												<!-- <div style="width:200 ; height: 200; position:absolute; background-color: black;">
+													<video id="source" src="" controls></video>
+												</div> -->
 												<div class="panel">
 													<div class="participant">
 														<img class="avatar-xxl" src="dist/img/avatars/avatar-female-5.jpg" alt="avatar">
@@ -863,10 +869,32 @@
 								</div>
 							</div>
 							<!-- End of Call -->
+							<div class="stream1" id="stream1">
+								<div class="content">
+									<div class="container">
+										<div class="col-md-12" style="position:relative;">
+											<div class="inside">
+												<!-- <div style="width:200 ; height: 200; position:absolute; background-color: black;">
+													<video id="source" src="" controls></video>
+												</div> -->
+												<div class="panel" style="position:relative">
+													<video width="200px" height="200px" style="top: 40px; left: 40px; position: absolute; z-index: 2;"  id="source" src="" controls>
+														
+													</video>
+													<video width="100%" height="700px" style="position: relative; z-index: 1; top: 10px;" id="dist" src="" controls >
+														
+													</video>
+													
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 						<!-- End of Babble -->
 						<!-- Start of Babble -->
-						<div class="babble tab-pane fade" id="list-empty" role="tabpanel" aria-labelledby="list-empty-list">
+						<div class="babble tab-pane fade " id="list-empty" role="tabpanel" aria-labelledby="list-empty-list">
 							<!-- Start of Chat -->
 							<div class="chat" id="chat2">
 								<div class="top">
@@ -1037,12 +1065,15 @@
 			function scrollToBottom(el) { el.scrollTop = el.scrollHeight; }
 			scrollToBottom(document.getElementById('content'));
 		</script>
+		<script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="/dist/js/init.js"></script>
 		<script>
 			var id = "<%= user._id %>"
 
+
 			join(id)
+			
 
 			function getValue(id){
 				var el = document.getElementById(id);
@@ -1066,6 +1097,15 @@
 			}, 5000);
 
 			
+		</script>
+
+		<script>
+			//  navigator.mediaDevices.getUserMedia({
+			// 	audio:true,
+			// 	video:true
+			// }).then(stream=>{
+			// 	showVideoStream(stream);
+			// }).catch(err=>console.log(err))
 		</script>
 	</body>
 
